@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rizqi Gunawan — Portfolio</title>
+  <style>
+    :root {
+      --bg: #0d1117;
+      --surface: #161b22;
+      --border: #30363d;
+      --text: #e6edf3;
+      --muted: #8b949e;
+      --accent: #58a6ff;
+      --accent2: #3fb950;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* NAV */
+    nav {
+      position: sticky; top: 0; z-index: 10;
+      background: rgba(13,17,23,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 2rem;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    nav .logo { font-weight: 700; font-size: 1.2rem; }
+    nav ul { list-style: none; display: flex; gap: 1.5rem; }
+    nav a { color: var(--muted); font-size: 0.9rem; }
+    nav a:hover { color: var(--accent); text-decoration: none; }
+
+    /* HERO */
+    .hero {
+      max-width: 900px; margin: 0 auto;
+      padding: 6rem 2rem 4rem;
+    }
+    .hero .eyebrow {
+      color: var(--accent2); font-size: 0.85rem; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.75rem;
+    }
+    .hero h1 {
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      font-weight: 800; line-height: 1.15; margin-bottom: 1.25rem;
+    }
+    .hero h1 span { color: var(--accent); }
+    .hero p { color: var(--muted); font-size: 1.15rem; max-width: 600px; margin-bottom: 2rem; }
+    .hero .cta-group { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      padding: 0.7rem 1.4rem; border-radius: 8px;
+      font-weight: 600; font-size: 0.95rem;
+      border: 1px solid var(--border); transition: all 0.2s;
+    }
+    .btn-primary { background: var(--accent); color: #000; border-color: var(--accent); }
+    .btn-primary:hover { background: #79b8ff; text-decoration: none; }
+    .btn-ghost { background: transparent; color: var(--text); }
+    .btn-ghost:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
+
+    /* SECTIONS */
+    section { max-width: 900px; margin: 0 auto; padding: 4rem 2rem; }
+    .section-label {
+      color: var(--muted); font-size: 0.8rem; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.5rem;
+    }
+    .section-title {
+      font-size: 1.75rem; font-weight: 700; margin-bottom: 2rem;
+    }
+
+    /* ABOUT */
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;
+    }
+    .about-text p { color: var(--muted); margin-bottom: 1rem; }
+    .stats { display: flex; flex-direction: column; gap: 1rem; }
+    .stat-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.25rem;
+    }
+    .stat-card .num { font-size: 1.8rem; font-weight: 800; color: var(--accent); }
+    .stat-card .label { color: var(--muted); font-size: 0.85rem; }
+
+    /* PROJECTS */
+    .projects-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+      gap: 1.25rem;
+    }
+    .project-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.5rem;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .project-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+    .project-icon { font-size: 2rem; margin-bottom: 0.75rem; }
+    .project-card h3 { font-size: 1.1rem; margin-bottom: 0.5rem; }
+    .project-card p { color: var(--muted); font-size: 0.9rem; margin-bottom: 1rem; }
+    .project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .tag {
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: 20px; padding: 0.2rem 0.6rem;
+      font-size: 0.75rem; color: var(--muted);
+    }
+
+    /* SKILLS */
+    .skills-list { display: flex; flex-direction: column; gap: 1rem; }
+    .skill-row {
+      display: flex; justify-content: space-between; align-items: center;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 10px; padding: 1rem 1.25rem;
+    }
+    .skill-name { font-weight: 600; }
+    .skill-desc { color: var(--muted); font-size: 0.85rem; }
+    .skill-bar-bg {
+      width: 120px; height: 6px; background: var(--bg);
+      border-radius: 3px; overflow: hidden;
+    }
+    .skill-bar {
+      height: 100%; border-radius: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+    }
+
+    /* CONTACT */
+    .contact-box {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 16px; padding: 2.5rem; text-align: center;
+    }
+    .contact-box h3 { font-size: 1.5rem; margin-bottom: 0.75rem; }
+    .contact-box p { color: var(--muted); margin-bottom: 1.5rem; }
+    .contact-links { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+
+    /* FOOTER */
+    footer {
+      text-align: center; padding: 2rem;
+      color: var(--muted); font-size: 0.8rem;
+      border-top: 1px solid var(--border);
+    }
+
+    @media (max-width: 640px) {
+      .about-grid { grid-template-columns: 1fr; }
+      nav ul { gap: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">RG</div>
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="hero">
+  <div class="eyebrow">Hello, I'm</div>
+  <h1>Rizqi <span>Gunawan</span></h1>
+  <p>
+    AI engineer &amp; tinkerer building practical systems at the intersection of automation, 
+    edge computing, and open-source tools. Currently working on WhatsApp receivers, 
+    monitoring dashboards, and autonomous AI agents.
+  </p>
+  <div class="cta-group">
+    <a href="#projects" class="btn btn-primary">View Projects ↓</a>
+    <a href="#contact" class="btn btn-ghost">Get in Touch</a>
+  </div>
+</div>
+
+<section id="about">
+  <div class="section-label">About</div>
+  <div class="section-title">What I do</div>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>
+        I'm a developer who loves building things that actually work — from automating 
+        tedious workflows to setting up infrastructure that runs itself.
+      </p>
+      <p>
+        My current focus is on AI agent orchestration, real-time data pipelines, 
+        and making hardware (especially Raspberry Pis) do useful stuff around the house 
+        and office.
+      </p>
+      <p>
+        When I'm not coding, I'm usually tinkering with LLMs, optimizing prompts, 
+        or finding better ways to connect systems that shouldn't talk to each other 
+        but totally should.
+      </p>
+    </div>
+    <div class="stats">
+      <div class="stat-card">
+        <div class="num">3+</div>
+        <div class="label">Years tinkering with code</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">10+</div>
+        <div class="label">Projects shipped</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">∞</div>
+        <div class="label">Curiosity level</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="section-label">Projects</div>
+  <div class="section-title">Selected work</div>
+  <div class="projects-grid">
+
+    <div class="project-card">
+      <div class="project-icon">💬</div>
+      <h3>WhatsApp Receiver</h3>
+      <p>Automated WhatsApp receiver system handling group messages, filtering, and processing via a local server.</p>
+      <div class="project-tags">
+        <span class="tag">Python</span>
+        <span class="tag">Automation</span>
+        <span class="tag">WhatsApp</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-icon">📊</div>
+      <h3>Pi Monitoring Dashboard</h3>
+      <p>Real-time Raspberry Pi monitoring dashboard with Flask backend, psutil metrics, and live history visualization.</p>
+      <div class="project-tags">
+        <span class="tag">Flask</span>
+        <span class="tag">Python</span>
+        <span class="tag">psutil</span>
+        <span class="tag">Raspberry Pi</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-icon">🤖</div>
+      <h3>Hermes Agent</h3>
+      <p>AI agent orchestration platform — managing multi-agent workflows, desktop automation, and tool integrations.</p>
+      <div class="project-tags">
+        <span class="tag">AI Agents</span>
+        <span class="tag">Python</span>
+        <span class="tag">Automation</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-icon">🔌</div>
+      <h3>PC Wake-on-LAN</h3>
+      <p>Remote wake-and-shutdown system for a Windows PC using WoL + SSH, controlled from anywhere on the network.</p>
+      <div class="project-tags">
+        <span class="tag">WoL</span>
+        <span class="tag">SSH</span>
+        <span class="tag">Python</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-icon">🔍</div>
+      <h3>ISDP Scraper</h3>
+      <p>Automated scraping pipeline for data extraction, processing, and structured output management.</p>
+      <div class="project-tags">
+        <span class="tag">Python</span>
+        <span class="tag">Scraping</span>
+        <span class="tag">Data Pipeline</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-icon">🧠</div>
+      <h3>LLM Experiments</h3>
+      <p>Local LLM inference with llama.cpp, prompt optimization, and custom agent loops for specialized tasks.</p>
+      <div class="project-tags">
+        <span class="tag">llama.cpp</span>
+        <span class="tag">LLMs</span>
+        <span class="tag">Prompt Engineering</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="skills">
+  <div class="section-label">Skills</div>
+  <div class="section-title">Tools & technologies</div>
+  <div class="skills-list">
+    <div class="skill-row">
+      <div><div class="skill-name">Python</div><div class="skill-desc">Primary language — scripting, automation, ML</div></div>
+      <div class="skill-bar-bg"><div class="skill-bar" style="width:95%"></div></div>
+    </div>
+    <div class="skill-row">
+      <div><div class="skill-name">Flask / Web APIs</div><div class="skill-desc">Dashboards, REST services, local servers</div></div>
+      <div class="skill-bar-bg"><div class="skill-bar" style="width:80%"></div></div>
+    </div>
+    <div class="skill-row">
+      <div><div class="skill-name">AI / LLMs</div><div class="skill-desc">Prompt engineering, agent design, llama.cpp</div></div>
+      <div class="skill-bar-bg"><div class="skill-bar" style="width:85%"></div></div>
+    </div>
+    <div class="skill-row">
+      <div><div class="skill-name">Linux / DevOps</div><div class="skill-desc">System administration, systemd, SSH, networking</div></div>
+      <div class="skill-bar-bg"><div class="skill-bar" style="width:75%"></div></div>
+    </div>
+    <div class="skill-row">
+      <div><div class="skill-name">Hardware / Raspberry Pi</div><div class="skill-desc">Edge computing, sensors, monitoring systems</div></div>
+      <div class="skill-bar-bg"><div class="skill-bar" style="width:70%"></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="section-label">Contact</div>
+  <div class="section-title">Let's connect</div>
+  <div class="contact-box">
+    <h3>Have a project in mind?</h3>
+    <p>I'm always open to discussing new ideas, collaborations, or just nerding out about tech.</p>
+    <div class="contact-links">
+      <a href="mailto:rizgun12@gmail.com" class="btn btn-primary">✉ Email Me</a>
+      <a href="https://github.com/rizgun12" class="btn btn-ghost" target="_blank">GitHub →</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2026 Rizqi Gunawan · Built with ❤️ and too much coffee
+</footer>
+
+</body>
+</html>
